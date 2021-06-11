@@ -1,6 +1,8 @@
-const clientId = '9cbd6f8faad140ccbbb80d86cbfd4538';
-let redirectUri = 'http://localhost:3000/'
-// change the ID and redirectUri before publish
+// const clientId = '9cbd6f8faad140ccbbb80d86cbfd4538'; //key for local app
+// let redirectUri = 'http://localhost:3000/' //uri for local app
+let redirectUri ='http://mason-spotify.surge.sh/'  //uri for deployed app
+const clientId = '7ce19974a1964353a05396afb501971b' //key for deployed app
+// use "npm run build" and change the ID and redirectUri before publish
 let accessToken;
 
 const Spotify = {
