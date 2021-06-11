@@ -34,17 +34,20 @@ const Spotify = {
         Authorization: `Bearer ${accessToken}`
       }
     }).then(response => {   //get the response and convert into JSON()
+      console.log('The first response is: ', response)
       return response.json();
     }).then(jsonResponse => {
       if (!jsonResponse.tracks) { // if returned JSON don't content tracks, simply return
         return [];  
       }
+      console.log('jsonResponse is: ', jsonResponse)
       return jsonResponse.tracks.items.map(eachTrack => ({
         id: eachTrack.id,
         name: eachTrack.name,
         artists: eachTrack.artists[0].name,
         album: eachTrack.album.name,
-        uri: eachTrack.uri
+        uri: eachTrack.uri,
+        image: eachTrack.album.images[2].url
       }));
     });
   },

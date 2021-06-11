@@ -12,7 +12,8 @@ class App extends React.Component {
     this.state = {
       searchResults: [],
       playlistName: '',
-      playlistTracks: []
+      playlistTracks: [],
+      image:[]
     };
 
     this.addTrack = this.addTrack.bind(this);
