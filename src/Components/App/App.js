@@ -63,8 +63,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Spotify Jam!</h1>
         <div className="App">
+        <h1>Spotify Jam!</h1>
         <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>

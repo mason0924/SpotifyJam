@@ -30,7 +30,8 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <form action="" onSubmit={this.onSubmit}>
+      // frame into form to allow using enter key
+      <form action="" onSubmit={this.onSubmit}> 
       <div className="SearchBar">
         <input placeholder="Enter A Song, Album, or Artist :-)" onChange={this.handleTermChange}/>
         <button className="SearchButton" onClick={this.search}>SEARCH</button>
