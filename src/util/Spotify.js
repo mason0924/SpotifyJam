@@ -1,7 +1,7 @@
-// const clientId = '9cbd6f8faad140ccbbb80d86cbfd4538'; //key for local app
-// let redirectUri = 'http://localhost:3000/' //uri for local app
-let redirectUri ='http://mason-spotify.surge.sh/'  //uri for deployed app
-const clientId = '7ce19974a1964353a05396afb501971b' //key for deployed app
+const clientId = '9cbd6f8faad140ccbbb80d86cbfd4538'; //key for local app
+let redirectUri = 'http://localhost:3000/' //uri for local app
+// let redirectUri ='http://mason-spotify.surge.sh/'  //uri for deployed app
+// const clientId = '7ce19974a1964353a05396afb501971b' //key for deployed app
 // use "npm run build" and change the ID and redirectUri before publish
 let accessToken;
 
@@ -43,6 +43,7 @@ const Spotify = {
         return [];  
       }
       console.log('jsonResponse is: ', jsonResponse)
+      console.log('the first song is: ', jsonResponse.tracks.items[0].href)
       return jsonResponse.tracks.items.map(eachTrack => ({
         id: eachTrack.id,
         name: eachTrack.name,
@@ -51,7 +52,7 @@ const Spotify = {
         uri: eachTrack.uri,
         image: eachTrack.album.images[2].url
       }));
-    });
+    }); //this line for next then
   },
 
   savePlaylist(playlistName, trackUris) {
@@ -81,6 +82,45 @@ const Spotify = {
           })
         }) 
     })
+  },
+
+  getUserData() {
+    const accessToken = Spotify.getAccessToken();
+    return fetch(`https://api.spotify.com/v1/me`, { //fetch,plus second arguement
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    }).then(response => {   //get the response and convert into JSON()
+      console.log('The user data is: ', response)
+      return response.json();
+    }).then(jsonResponse => {
+      // if (!jsonResponse.tracks) { // if returned JSON don't content tracks, simply return
+      //   return [];
+      // }
+      console.log('The JSON user data is: ', jsonResponse)
+      return jsonResponse
+      // return jsonResponse.tracks.items.map(eachTrack => ({
+      //   id: eachTrack.id,
+      //   name: eachTrack.name,
+      //   artists: eachTrack.artists[0].name,
+      //   album: eachTrack.album.name,
+      //   uri: eachTrack.uri,
+      //   image: eachTrack.album.images[2].url
+      // }));
+    })
+
+  },
+
+  loginStatus() {
+    if(accessToken) {
+      return true
+    } return false
+  },
+
+  logout() {
+    console.log(accessToken);
+    accessToken = '';
+    console.log('logged out accessToken:' , accessToken)
   }
 }
 

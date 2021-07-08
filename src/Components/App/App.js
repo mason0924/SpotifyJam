@@ -13,7 +13,10 @@ class App extends React.Component {
       searchResults: [],
       playlistName: '',
       playlistTracks: [],
-      image:[]
+      image:[],
+      userName: '',
+      userImage:'',
+      // loginStatus: Spotify.loginStatus(),
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -21,6 +24,7 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   addTrack(track) {
@@ -58,6 +62,15 @@ class App extends React.Component {
    Spotify.search(input).then(searchResults => {  //the received search results will pass into the state
      this.setState({ searchResults: searchResults});
    });
+    // Spotify.getUserData()
+   Spotify.getUserData().then(userData => {
+     this.setState({ userName: userData.display_name, userImage: userData.images[0].url})
+     console.log(this.state.userImage)
+   });
+  }
+
+  logout() {
+    Spotify.logout();
   }
 
   render() {
@@ -65,6 +78,9 @@ class App extends React.Component {
       <div>
         <div className="App">
         <h1>Spotify Jam!</h1>
+        <img src={this.state.userImage} alt="" />
+        <h2>{this.state.userName? `Hi ${this.state.userName}` : '' }</h2>
+          {/* <button onClick={this.logout}>{this.state.loginStatus? 'Log in' : 'Log out'}</button> */}
         <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
