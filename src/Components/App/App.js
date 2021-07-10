@@ -78,8 +78,10 @@ class App extends React.Component {
       <div>
         <div className="App">
         <h1>Spotify Jam!</h1>
+        <div className="user">
         <img src={this.state.userImage} alt="" />
-        <h2>{this.state.userName? `Hi ${this.state.userName}` : '' }</h2>
+            <h2>{this.state.userName ? `Hi ${this.state.userName[0].toUpperCase()}${this.state.userName.slice(1)}` : '' }</h2>
+        </div>
           {/* <button onClick={this.logout}>{this.state.loginStatus? 'Log in' : 'Log out'}</button> */}
         <SearchBar onSearch={this.search} />
           <div className="App-playlist">

@@ -49,6 +49,11 @@ h2 {
   color: #fff;
 }
 
+.user {
+  text-align: center;
+  margin-top: 4rem;
+}
+
 @keyframes bg-animation {
   0% {background-position: left}
   50% {background-position: right}
