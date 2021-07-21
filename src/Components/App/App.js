@@ -16,7 +16,7 @@ class App extends React.Component {
       image:[],
       userName: '',
       userImage:'',
-      // loginStatus: Spotify.loginStatus(),
+      loginStatus: Spotify.loginStatus(),
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -82,7 +82,7 @@ class App extends React.Component {
         <img src={this.state.userImage} alt="" />
             <h2>{this.state.userName ? `Hi ${this.state.userName[0].toUpperCase()}${this.state.userName.slice(1)}` : '' }</h2>
         </div>
-          {/* <button onClick={this.logout}>{this.state.loginStatus? 'Log in' : 'Log out'}</button> */}
+          <p>Your login status: {this.state.loginStatus? 'Logged in' :' Unlogged in'}</p>
         <SearchBar onSearch={this.search} />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
